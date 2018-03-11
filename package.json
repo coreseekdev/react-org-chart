@@ -1,0 +1,41 @@
+{
+  "name": "react-org-chart",
+  "version": "0.1.0",
+  "description": "Simple, high-performance react component for d3 org chart",
+  "main": "index.js",
+  "directories": {
+    "example": "src/examples"
+  },
+  "scripts": {
+    "build": "webpack --mode production",
+    "clean": "rimraf dist",
+    "dev": "webpack --mode production && webpack-dev-server --mode development --config webpack.dev.config.js --open"
+  },
+  "keywords": [],
+  "author": "Fouad Matin <m@fouad.org>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "faker": "^4.1.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.10",
+    "webpack-dev-server": "^3.1.0"
+  },
+  "peerDependencies": {
+    "d3": ">= 3.x < 4",
+    "react": ">= 15.x",
+    "react-dom": ">= 15.x"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "stage-2"
+    ]
+  }
+}

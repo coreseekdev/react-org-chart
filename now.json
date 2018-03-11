@@ -1,0 +1,5 @@
+{
+    "name": "react-org-chart",
+    "type": "static",
+    "files": ["examples", "dist"]
+}
