@@ -2,7 +2,7 @@
   "name": "react-org-chart",
   "version": "0.1.0",
   "description": "Simple, high-performance react component for d3 org chart",
-  "main": "index.js",
+  "main": "dist/index.js",
   "directories": {
     "example": "src/examples"
   },
