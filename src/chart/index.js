@@ -103,6 +103,7 @@ function init(options) {
   const zoom = d3.behavior
     .zoom()
     .scaleExtent([0.15, 3])
+    .duration(50)
     .on('zoom', renderUpdate(config))
 
   // Attach zoom behavior to the svg root

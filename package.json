@@ -2,6 +2,7 @@
   "name": "react-org-chart",
   "version": "0.1.0",
   "description": "Simple, high-performance react component for d3 org chart",
+  "repository": "https://github.com/latticehr/react-org-chart.git",
   "main": "dist/index.js",
   "directories": {
     "example": "src/examples"
@@ -37,5 +38,8 @@
       "env",
       "stage-2"
     ]
+  },
+  "dependencies": {
+    "d3": "^3.5.17"
   }
 }

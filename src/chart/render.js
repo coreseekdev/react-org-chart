@@ -1,11 +1,13 @@
 const { wrapText, helpers } = require('../utils')
 const renderLines = require('./render-lines')
 const onClick = require('./on-click')
+const iconLink = require('./components/icon-link')
 
 const CHART_NODE_CLASS = 'org-chart-node'
 const PERSON_NAME_CLASS = 'org-chart-person-name'
 const PERSON_TITLE_CLASS = 'org-chart-person-title'
 const PERSON_DEPARTMENT_CLASS = 'org-chart-person-dept'
+const PERSON_REPORTS_CLASS = 'org-chart-person-reports'
 
 function render(config) {
   const {
@@ -81,8 +83,8 @@ function render(config) {
     .attr('class', 'box')
 
   const namePos = {
-    x: nodePaddingX + avatarWidth + nodePaddingX,
-    y: nodePaddingY * 2
+    x: nodePaddingX * 1.4 + avatarWidth,
+    y: nodePaddingY * 1.8
   }
 
   // Person's Name
@@ -91,9 +93,10 @@ function render(config) {
     .attr('class', PERSON_NAME_CLASS)
     .attr('x', namePos.x)
     .attr('y', namePos.y)
-    .attr('dy', '.35em')
+    .attr('dy', '.3em')
     .style('cursor', 'pointer')
     .style('fill', nameColor)
+    .style('font-size', 16)
     .text(d => d.person.name)
 
   // Person's Title
@@ -101,8 +104,9 @@ function render(config) {
     .append('text')
     .attr('class', PERSON_TITLE_CLASS + ' unedited')
     .attr('x', namePos.x)
-    .attr('y', namePos.y + nodePaddingY)
-    .attr('dy', '.9em')
+    .attr('y', namePos.y + nodePaddingY * 1.2)
+    .attr('dy', '0.1em')
+    .style('font-size', 14)
     .style('cursor', 'pointer')
     .style('fill', titleColor)
     .text(d => d.person.title)
@@ -112,9 +116,12 @@ function render(config) {
   // Person's Reports
   nodeEnter
     .append('text')
+    .attr('class', PERSON_REPORTS_CLASS)
     .attr('x', namePos.x)
     .attr('y', namePos.y + nodePaddingY + heightForTitle)
     .attr('dy', '.9em')
+    .style('font-size', 14)
+    .style('font-weight', 500)
     .style('cursor', 'pointer')
     .style('fill', reportsColor)
     .text(helpers.getTextForTitle)
@@ -124,8 +131,8 @@ function render(config) {
     .append('image')
     .attr('width', avatarWidth)
     .attr('height', avatarWidth)
-    .attr('x', 8)
-    .attr('y', 8)
+    .attr('x', nodePaddingX)
+    .attr('y', nodePaddingY)
     .attr('stroke', borderColor)
     .attr('src', d => d.person.avatar)
     .attr('xlink:href', d => d.person.avatar)
@@ -138,8 +145,8 @@ function render(config) {
       'class',
       d => PERSON_DEPARTMENT_CLASS + ' ' + d.person.department.toLowerCase()
     )
-    .attr('x', avatarWidth / 2 + nodePaddingY)
-    .attr('y', avatarWidth + nodePaddingY * 2)
+    .attr('x', 34)
+    .attr('y', avatarWidth + nodePaddingY * 1.2)
     .attr('dy', '.9em')
     .style('cursor', 'pointer')
     .style('fill', titleColor)
@@ -149,13 +156,7 @@ function render(config) {
     .text(helpers.getTextForDepartment)
 
   // Person's Link
-  nodeEnter
-    .append('text')
-    .attr('x', nodeWidth - 28)
-    .attr('y', nodeHeight - 20)
-    .style('font-weight', 600)
-    .style('font-size', 12)
-    .style('cursor', 'pointer')
+  const nodeLink = nodeEnter
     .append('a')
     .attr('xlink:href', 'https://lattice.com')
     .on('click', datum => {
@@ -165,7 +166,30 @@ function render(config) {
         onPersonLinkClick(datum, d3.event)
       }
     })
-    .text('🔗')
+
+  iconLink({
+    svg: nodeLink,
+    x: nodeWidth - 28,
+    y: nodeHeight - 28
+  })
+
+  // nodeEnter
+  //   .append('text')
+  //   .attr('x', nodeWidth - 28)
+  //   .attr('y', nodeHeight - 20)
+  //   .style('font-weight', 600)
+  //   .style('font-size', 12)
+  //   .style('cursor', 'pointer')
+  //   .append('a')
+  //   .attr('xlink:href', 'https://lattice.com')
+  //   .on('click', datum => {
+  //     d3.event.stopPropagation()
+  //     // TODO: fire link click handler
+  //     if (onPersonLinkClick) {
+  //       onPersonLinkClick(datum, d3.event)
+  //     }
+  //   })
+  //   .text('🔗')
 
   // Transition nodes to their new position.
   const nodeUpdate = node
@@ -190,7 +214,8 @@ function render(config) {
   const link = svg.selectAll('path.link').data(links, d => d.target.id)
 
   // Wrap the title texts
-  const wrapWidth = 108
+  const wrapWidth = 140
+
   svg.selectAll('text.unedited.' + PERSON_TITLE_CLASS).call(wrapText, wrapWidth)
 
   // Render lines connecting nodes

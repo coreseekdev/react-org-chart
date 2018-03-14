@@ -22,7 +22,8 @@ module.exports = [
     dependencies: ['vendor'],
     entry: {
       index: './src/index',
-      exampleSimple: './src/examples/simple'
+      exampleSimple: './src/examples/simple',
+      exampleReact: './src/examples/react'
     },
     output: {
       filename: '[name].bundle.js',

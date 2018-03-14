@@ -65,7 +65,7 @@ function getDept() {
 }
 
 function getChildren({ depth, department }, genData) {
-  const length = Math.ceil(Math.random() * 4) + (4 - depth)
+  const length = Math.ceil(Math.random() * 6) + (4 - depth)
 
   if (length < 0) {
     return { totalReports: 0, children: [] }
