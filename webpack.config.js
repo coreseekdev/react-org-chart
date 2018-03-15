@@ -1,5 +1,33 @@
+const glob = require('glob')
 const webpack = require('webpack')
 const { resolve } = require('path')
+
+const getFilename = path =>
+  path
+    .split('\\')
+    .pop()
+    .split('/')
+    .pop()
+    .replace('.js', '')
+
+const getExamples = () => {
+  return glob
+    .sync('./src/examples/*.js', {
+      matchBase: true
+    })
+    .map(path => {
+      const filename = getFilename(path)
+
+      return {
+        name: `example-${filename}`,
+        value: `./src/examples/${filename}.js`
+      }
+    })
+    .reduce((acc, o) => {
+      acc[o.name] = o.value
+      return acc
+    }, {})
+}
 
 module.exports = [
   {
@@ -22,8 +50,7 @@ module.exports = [
     dependencies: ['vendor'],
     entry: {
       index: './src/index',
-      exampleSimple: './src/examples/simple',
-      exampleReact: './src/examples/react'
+      ...getExamples()
     },
     output: {
       filename: '[name].bundle.js',

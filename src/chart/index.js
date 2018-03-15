@@ -45,6 +45,11 @@ function init(options) {
   // Get the root element
   const elem = document.querySelector(id)
 
+  if (!elem) {
+    console.error(`react-org-chart: svg root DOM node not found (id: ${id})`)
+    return
+  }
+
   // Reset in case there's any existing DOM
   elem.innerHTML = ''
 
@@ -102,7 +107,8 @@ function init(options) {
   // Defined zoom behavior
   const zoom = d3.behavior
     .zoom()
-    .scaleExtent([0.15, 3])
+    // Define the [zoomOutBound, zoomInBound]
+    .scaleExtent([0.4, 2])
     .duration(50)
     .on('zoom', renderUpdate(config))
 

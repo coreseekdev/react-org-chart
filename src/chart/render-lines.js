@@ -19,7 +19,9 @@ function renderLines(config = {}) {
   const parentNode = sourceNode || treeData
 
   // Select all the links to render the lines
-  const link = svg.selectAll('path.link').data(links, d => d.target.id)
+  const link = svg
+    .selectAll('path.link')
+    .data(links.filter(link => link.source.id), d => d.target.id)
 
   // Define the curved line function
   const curve = d3.svg

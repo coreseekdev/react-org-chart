@@ -4,6 +4,7 @@ const onClick = require('./on-click')
 const iconLink = require('./components/icon-link')
 
 const CHART_NODE_CLASS = 'org-chart-node'
+const PERSON_LINK_CLASS = 'org-chart-person-link'
 const PERSON_NAME_CLASS = 'org-chart-person-name'
 const PERSON_TITLE_CLASS = 'org-chart-person-title'
 const PERSON_DEPARTMENT_CLASS = 'org-chart-person-dept'
@@ -45,7 +46,9 @@ function render(config) {
   })
 
   // Update the nodes
-  const node = svg.selectAll('g.' + CHART_NODE_CLASS).data(nodes, d => d.id)
+  const node = svg
+    .selectAll('g.' + CHART_NODE_CLASS)
+    .data(nodes.filter(d => d.id), d => d.id)
   const parentNode = sourceNode || treeData
 
   // Enter any new nodes at the parent's previous position.
@@ -141,10 +144,7 @@ function render(config) {
   // Person's Department
   nodeEnter
     .append('text')
-    .attr(
-      'class',
-      d => PERSON_DEPARTMENT_CLASS + ' ' + d.person.department.toLowerCase()
-    )
+    .attr('class', getDepartmentClass)
     .attr('x', 34)
     .attr('y', avatarWidth + nodePaddingY * 1.2)
     .attr('dy', '.9em')
@@ -158,7 +158,8 @@ function render(config) {
   // Person's Link
   const nodeLink = nodeEnter
     .append('a')
-    .attr('xlink:href', 'https://lattice.com')
+    .attr('class', PERSON_LINK_CLASS)
+    .attr('xlink:href', d => d.person.link || 'https://lattice.com')
     .on('click', datum => {
       d3.event.stopPropagation()
       // TODO: fire link click handler
@@ -172,24 +173,6 @@ function render(config) {
     x: nodeWidth - 28,
     y: nodeHeight - 28
   })
-
-  // nodeEnter
-  //   .append('text')
-  //   .attr('x', nodeWidth - 28)
-  //   .attr('y', nodeHeight - 20)
-  //   .style('font-weight', 600)
-  //   .style('font-size', 12)
-  //   .style('cursor', 'pointer')
-  //   .append('a')
-  //   .attr('xlink:href', 'https://lattice.com')
-  //   .on('click', datum => {
-  //     d3.event.stopPropagation()
-  //     // TODO: fire link click handler
-  //     if (onPersonLinkClick) {
-  //       onPersonLinkClick(datum, d3.event)
-  //     }
-  //   })
-  //   .text('🔗')
 
   // Transition nodes to their new position.
   const nodeUpdate = node
@@ -226,6 +209,17 @@ function render(config) {
     d.x0 = d.x
     d.y0 = d.y
   })
+}
+
+function getDepartmentClass(d) {
+  if (!d.person.department) {
+    return PERSON_DEPARTMENT_CLASS
+  }
+
+  console.log(d)
+  return PERSON_DEPARTMENT_CLASS + ' ' + d.person.department
+    ? d.person.department.toLowerCase()
+    : ''
 }
 
 module.exports = render

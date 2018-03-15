@@ -1,5 +1,30 @@
+const glob = require('glob')
 const webpack = require('webpack')
 const { resolve } = require('path')
+
+const getFilename = path =>
+  path
+    .split('\\')
+    .pop()
+    .split('/')
+    .pop()
+    .replace('.js', '')
+
+const getExamples = () => {
+  return glob
+    .sync('./src/examples/*.js', {
+      matchBase: true
+    })
+    .map(getFilename)
+    .map(filename => ({
+      name: `example-${filename}`,
+      value: `./src/examples/${filename}.js`
+    }))
+    .reduce((acc, o) => {
+      acc[o.name] = o.value
+      return acc
+    }, {})
+}
 
 module.exports = {
   name: 'react-org-chart',
@@ -7,8 +32,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: {
     index: './src/index',
-    exampleSimple: './src/examples/simple',
-    exampleReact: './src/examples/react'
+    ...getExamples()
   },
   output: {
     filename: '[name].bundle.js',
