@@ -40,8 +40,5 @@
       "env",
       "stage-2"
     ]
-  },
-  "dependencies": {
-    "d3": "^3.5.17"
   }
 }
