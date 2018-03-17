@@ -126,7 +126,7 @@ function init(options) {
   // Add listener for when the browser or parent node resizes
   const resize = () => {
     if (!elem) {
-      window.removeEventListener('resize', resize)
+      global.removeEventListener('resize', resize)
       return
     }
 
@@ -134,7 +134,7 @@ function init(options) {
   }
 
   if (shouldResize) {
-    window.addEventListener('resize', resize)
+    global.addEventListener('resize', resize)
   }
 
   // Start initial render

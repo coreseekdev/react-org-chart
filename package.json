@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "description": "Simple, high-performance react component for d3 org chart",
   "repository": "https://github.com/latticehr/react-org-chart.git",
-  "main": "dist/index.bundle.js",
+  "main": "dist/index.js",
   "directories": {
     "example": "src/examples"
   },
+  "files": [
+    "dist/index.js"
+  ],
   "scripts": {
     "build": "webpack --mode production",
+    "build-vendor": "webpack --mode production --config webpack.vendor.config.js",
     "clean": "rimraf dist",
-    "dev": "webpack --mode production && webpack-dev-server --mode development --config webpack.dev.config.js --open"
+    "dev": "npm run build-vendor && webpack-dev-server --mode development --config webpack.dev.config.js"
   },
   "keywords": [],
   "author": "Fouad Matin <m@fouad.org>",
