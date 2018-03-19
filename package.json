@@ -14,7 +14,9 @@
     "build": "webpack --mode production",
     "build-vendor": "webpack --mode production --config webpack.vendor.config.js",
     "clean": "rimraf dist",
-    "dev": "npm run build-vendor && webpack-dev-server --mode development --config webpack.dev.config.js"
+    "dev": "npm run build-vendor && webpack-dev-server --mode development --config webpack.dev.config.js",
+    "deploy": "npm run build-vendor && now",
+    "deploy-prod": "npm run deploy && now alias"
   },
   "keywords": [],
   "author": "Fouad Matin <m@fouad.org>",
