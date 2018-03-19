@@ -24,7 +24,9 @@ const departmentAbbrMap = {
   Data: 'data',
   Design: 'design',
   Communications: 'comms',
-  Product: 'prod'
+  Product: 'prod',
+  People: 'people',
+  Sales: 'sales'
 }
 
 function getTextForDepartment(datum) {
