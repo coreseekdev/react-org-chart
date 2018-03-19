@@ -212,14 +212,10 @@ function render(config) {
 }
 
 function getDepartmentClass(d) {
-  if (!d.person.department) {
-    return PERSON_DEPARTMENT_CLASS
-  }
+  const { person } = d
+  const deptClass = person.department ? person.department.toLowerCase() : ''
 
-  console.log(d)
-  return PERSON_DEPARTMENT_CLASS + ' ' + d.person.department
-    ? d.person.department.toLowerCase()
-    : ''
+  return [PERSON_DEPARTMENT_CLASS, deptClass].join(' ')
 }
 
 module.exports = render
