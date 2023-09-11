@@ -1,8 +1,8 @@
 {
-  "name": "@latticehr/react-org-chart",
+  "name": "@elsouza/react-org-chart",
   "version": "0.1.1",
   "description": "Simple, high-performance react component for d3 org chart",
-  "repository": "https://github.com/latticehr/react-org-chart.git",
+  "repository": "https://github.com/elsouza1985/react-org-chart.git",
   "main": "dist/index.js",
   "directories": {
     "example": "src/examples"
