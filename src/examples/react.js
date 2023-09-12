@@ -24,7 +24,7 @@ const props = {
     // this could also just be `return tree.children`
     return Promise.resolve(tree.children)
   },
-  lineType: 'curve'
+  lineType: 'angle'
 }
 
 ReactDOM.render(React.createElement(OrgChart, props, null), root)

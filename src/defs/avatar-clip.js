@@ -14,7 +14,7 @@ module.exports = function defineAvatarClip(svg, id, config = {}) {
     .append('clipPath')
     .attr('id', id)
     .append('circle')
-    .attr('cx', 34)
-    .attr('cy', 34)
-    .attr('r', 18)
+    .attr('cx', 35)
+    .attr('cy', 45)
+    .attr('r', 30)
 }
