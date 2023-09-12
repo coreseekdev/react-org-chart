@@ -1,8 +1,11 @@
 {
-  "name": "@latticehr/react-org-chart",
-  "version": "0.1.1",
+  "name": "@elsouza1985/react-org-chart",
+  "version": "1.0.1",
   "description": "Simple, high-performance react component for d3 org chart",
-  "repository": "https://github.com/latticehr/react-org-chart.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elsouza1985/react-org-chart.git"
+  },
   "main": "dist/index.js",
   "directories": {
     "example": "src/examples"
@@ -32,8 +35,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "rimraf": "^2.6.2",
-    "webpack": "^4.0.1",
-    "webpack-cli": "^2.0.10",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.1.1",
     "webpack-dev-server": "^3.1.0"
   },
   "peerDependencies": {
@@ -46,5 +49,9 @@
       "env",
       "stage-2"
     ]
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/elsouza1985/react-org-chart/issues"
+  },
+  "homepage": "https://github.com/elsouza1985/react-org-chart#readme"
 }

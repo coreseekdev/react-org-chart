@@ -2,12 +2,12 @@ const animationDuration = 350
 const shouldResize = true
 
 // Nodes
-const nodeWidth = 240
-const nodeHeight = 120
+const nodeWidth = 300
+const nodeHeight = 80
 const nodeSpacing = 12
-const nodePaddingX = 16
+const nodePaddingX = 4
 const nodePaddingY = 16
-const avatarWidth = 40
+const avatarWidth = 80
 const nodeBorderRadius = 4
 const margin = {
   top: 20,
@@ -21,7 +21,7 @@ const lineType = 'angle'
 const lineDepthY = 120 /* Height of the line for child nodes */
 
 // Colors
-const backgroundColor = '#fff'
+const backgroundColor = 'rgb(243,244,246)'
 const borderColor = '#e6e8e9'
 const nameColor = '#222d38'
 const titleColor = '#617080'
